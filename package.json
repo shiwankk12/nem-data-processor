@@ -1,5 +1,5 @@
 {
-  "name": "nem12-processor",
+  "name": "nem-data-processor",
   "version": "0.1.0",
   "private": true,
   "scripts": {
