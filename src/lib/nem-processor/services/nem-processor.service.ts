@@ -6,6 +6,7 @@ import {
 } from "../types";
 import { ReadingProcessor } from "../utils/reading-processor";
 import { SQLGenerator } from "../utils/sql-generator";
+import { StreamingUtils } from "../utils/streaming-utils";
 import { SummaryGenerator } from "../utils/summary-generator";
 import { CSVFileValidator } from "../validators/csv-file.validator";
 
@@ -33,11 +34,11 @@ export class NEMProcessorService implements INEMProcessor {
       // Validate file first
       this.validateFile(file);
 
-      // Read file content
-      const content = await file.text();
-
-      // Parse using injected parser
-      const { readings, errors } = this.parser.parseCSVContent(content);
+      // Process file using streaming
+      const { readings, errors } = await StreamingUtils.processFileStream(
+        file,
+        this.parser
+      );
 
       // Process readings (business logic remains the same)
       const { processedReadings, duplicatesFound, registerStats } =

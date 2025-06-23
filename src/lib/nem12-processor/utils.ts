@@ -3,6 +3,7 @@ import {
   COLUMN_INDICES,
   DATE_FORMAT_INDICES,
   DEFAULT_INTERVAL_LENGTH,
+  FIELD_DELIMITER,
   MILLISECONDS_PER_MINUTE,
   MINUTES_IN_A_DAY,
   NEM_FORMAT,
@@ -48,7 +49,7 @@ export const parseNEM12Date = (dateStr: string): Date => {
 
 export const parseNEM12Line = (line: string, context: NEM12Context) => {
   try {
-    const fields = line.split(",").map((field) => field.trim());
+    const fields = line.split(FIELD_DELIMITER).map((field) => field.trim());
     const recordType = fields[COLUMN_INDICES.RECORD_TYPE];
 
     switch (recordType) {

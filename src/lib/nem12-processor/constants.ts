@@ -48,3 +48,6 @@ export const DATE_FORMAT_INDICES = Object.freeze({
   DAY_START: 6,
   DAY_END: 8,
 } as const);
+
+/** Default field delimiter */
+export const FIELD_DELIMITER = ",";

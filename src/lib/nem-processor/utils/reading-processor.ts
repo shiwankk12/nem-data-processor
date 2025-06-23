@@ -1,3 +1,4 @@
+import { NMI_PARSING } from "../constants";
 import type { MeterReading, RegisterProcessingResult } from "../types";
 
 /**
@@ -51,8 +52,11 @@ export class ReadingProcessor {
   static sortByNMI(readings: MeterReading[]): MeterReading[] {
     return readings.sort((a, b) => {
       const parseNMI = (nmi: string) => {
-        const parts = nmi.split("_");
-        return { baseNMI: parts[0], register: parts[1] || "" };
+        const parts = nmi.split(NMI_PARSING.SEPARATOR);
+        return {
+          baseNMI: parts[NMI_PARSING.INDICES.BASE_NMI],
+          register: parts[NMI_PARSING.INDICES.REGISTER] || "",
+        };
       };
 
       const aNMI = parseNMI(a.nmi);
@@ -97,12 +101,12 @@ export class ReadingProcessor {
   ): MeterReading[] {
     return groupReadings.map((reading, index) => {
       // Generate register suffix (R1, R2, R3, etc.)
-      const registerSuffix = `R${index + 1}`;
+      const registerSuffix = `${NMI_PARSING.REGISTER_PREFIX}${index + 1}`;
       registerStats[registerSuffix] = (registerStats[registerSuffix] || 0) + 1;
 
       return {
         ...reading,
-        nmi: `${reading.nmi}_${registerSuffix}`, // Append suffix to make NMI unique
+        nmi: `${reading.nmi}${NMI_PARSING.SEPARATOR}${registerSuffix}`, // Append suffix to make NMI unique
         register: registerSuffix,
       };
     });
