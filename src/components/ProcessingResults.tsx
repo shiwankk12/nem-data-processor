@@ -11,7 +11,7 @@ import {
   Grid,
 } from "@mui/material";
 import { Storage, CheckCircle, Download } from "@mui/icons-material";
-import { ProcessingResult } from "@/lib/nem-processor/types";
+import { ProcessingResult } from "./types";
 
 type ProcessingResultsProps = {
   result: ProcessingResult | null;

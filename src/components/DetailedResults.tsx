@@ -23,7 +23,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { Error } from "@mui/icons-material";
-import { ProcessingResult } from "@/lib/nem-processor/types";
+import { ProcessingResult } from "./types";
 
 type TabPanelProps = {
   children?: React.ReactNode;
