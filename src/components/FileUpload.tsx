@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Upload, Description, Error } from "@mui/icons-material";
 
-type FileUploadProps = {
+export type FileUploadProps = {
   file: File | null;
   isProcessing: boolean;
   error: string | null;
@@ -23,13 +23,13 @@ type FileUploadProps = {
   onProcess: () => void;
 };
 
-export function FileUpload({
+export const FileUpload = ({
   file,
   isProcessing,
   error,
   onFileChange,
   onProcess,
-}: FileUploadProps) {
+}: FileUploadProps) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0] || null;
     onFileChange(selectedFile);
@@ -114,4 +114,4 @@ export function FileUpload({
       </CardContent>
     </Card>
   );
-}
+};
