@@ -1,6 +1,6 @@
 "use client";
 
-import { ProcessingResult } from "@/lib/types";
+import { ProcessingResult } from "@/lib/nem-processor/types";
 import { useState } from "react";
 
 /**

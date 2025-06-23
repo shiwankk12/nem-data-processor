@@ -1,16 +1,14 @@
+import { NEM12ProcessorService } from "@/lib/nem12-processor";
 import type { NextRequest } from "next/server";
-import { NEM12ProcessorService } from "@/lib/services/nem12-processor";
 
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get("file") as File;
 
-    // Validate file
-    NEM12ProcessorService.validateFile(file);
-
     // Process file
-    const result = await NEM12ProcessorService.processFile(file);
+    const processor = new NEM12ProcessorService();
+    const result = await processor.processFile(file);
 
     return new Response(JSON.stringify(result), {
       status: 200,

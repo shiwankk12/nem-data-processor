@@ -35,6 +35,18 @@ export function FileUpload({
     onFileChange(selectedFile);
   };
 
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return "0 Bytes";
+
+    const bytesPerUnit = 1024;
+    const sizeUnits = ["Bytes", "KB", "MB", "GB"];
+    const unitIndex = Math.floor(Math.log(bytes) / Math.log(bytesPerUnit));
+
+    return `${parseFloat(
+      (bytes / Math.pow(bytesPerUnit, unitIndex)).toFixed(2)
+    )} ${sizeUnits[unitIndex]}`;
+  };
+
   return (
     <Card>
       <CardHeader
@@ -69,7 +81,7 @@ export function FileUpload({
               </Box>
               {/* Display file size in MB */}
               <Typography variant="caption" color="text.secondary">
-                Size: {(file.size / 1024 / 1024).toFixed(2)} MB
+                Size: {formatFileSize(file.size)}
               </Typography>
             </Paper>
           )}
