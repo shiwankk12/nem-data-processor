@@ -125,6 +125,12 @@ pnpm test
 
 # Run tests in watch mode
 pnpm test:watch
+
+# Run only frontend tests
+pnpm test:frontend
+
+# Run only backend tests
+pnpm test:backend
 ```
 
 #### Linting

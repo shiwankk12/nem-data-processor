@@ -47,7 +47,7 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
-export function DetailedResults({ result }: { result: ProcessingResult }) {
+export const DetailedResults = ({ result }: { result: ProcessingResult }) => {
   const [tabValue, setTabValue] = useState(0);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -177,4 +177,4 @@ export function DetailedResults({ result }: { result: ProcessingResult }) {
       </CardContent>
     </Card>
   );
-}
+};

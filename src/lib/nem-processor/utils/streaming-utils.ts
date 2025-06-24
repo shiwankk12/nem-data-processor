@@ -6,6 +6,14 @@ import { INEMParser, MeterReading, ParseResult } from "../types";
 export class StreamingUtils {
   /**
    * Process a file using streaming approach
+   *
+   * Reads large files chunk-by-chunk to avoid memory overload, parsing each
+   * complete line immediately rather than loading entire file into memory.
+   * Maintains a buffer for incomplete lines across chunk boundaries.
+   *
+   * @param file - File to process
+   * @param parser - Parser instance to handle each line
+   * @returns Promise resolving to all parsed readings and accumulated errors
    */
   static async processFileStream(
     file: File,
@@ -22,6 +30,7 @@ export class StreamingUtils {
     const decoder = new TextDecoder();
 
     try {
+      // Main streaming loop: read file in chunks
       while (true) {
         // Read next chunk from file
         const { done, value } = await reader.read();
